@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ExportController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,5 +28,16 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
+
+Route::controller(ExportController::class)->group(function(){
+
+    Route::get('/export-to-xlsx', 'exportToXlsx')->name('export_to_xlsx');
+    Route::get('/export-to-csv', 'exportToCSV')->name('export_to_csv');
+
+});
+
+
 
 require __DIR__.'/auth.php';
